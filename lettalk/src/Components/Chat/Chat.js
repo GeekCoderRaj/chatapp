@@ -25,44 +25,49 @@ const Chat = () => {
 		});
 		socket.emit('joined', { user: users.user, room: users.room });
 		socket.on('welcome', (data) => {
-			console.log(data.user, data.message);
+			console.log(data?.user, data?.message);
 		});
 		socket.on('userJoined', (data) => {
-			console.log(data.user, data.message);
+			console.log(data?.user, data?.message);
 		});
         socket.on('sendMessage', (data) =>{ 
             console.log("receive");
-            setMessages(messages.push({id: data.id,msg: data.message}));
-            // console.log(messages);
-            // console.log(data.message);
-            // console.log(typeof(messages))
-            Object.entries(messages).map(messages =>
-                console.log(messages[1].msg));
-        //     for (const [message,id] of Object.entries(messages))
-        // console.log(message,id);
+            // setMessages(messages.push({id: data.id,msg: data.message})); ([...messages,{id: data.id,msg: data.message}])
+            let temp=messages;
+            temp.push({user:data.user,id: data.id,message: data.message});
+            setMessages(temp);
+            console.log(temp,"kkk");
         });  
 		return () => {
-			// socket.emit('disconnect', { room: users.room });
-			// console.log('user left');
-			// socket.off();
+			socket.emit('disconnect', { room: users.room });
+			console.log('user left');
+			socket.off();
 		};
 	}, []);
+
+
 	return (
         <div className="chatPage">
-            <div className="chatContainer">
-                <div className="header">
-                    {Object.entries(messages).map((msg)=>{
-                        return <Message message={msg[1].message}/>
-                    })}
-                <div className="inputBox">
-                    <input onKeyPress={(event) => event.key === 'Enter' ? send() : null} type="text" id="chatInput" />
-                    <button onClick={send} className="sendBtn">Send</button>
-                </div>
+        <div className="chatContainer">
+            <div className="header">
+                <h2>C CHAT</h2>
+                <a href="/"> CLose</a>
             </div>
+            {/* <div> */}
+                {messages.map((item) => {console.log(item)
+                return(<Message user={item} id={id}  key={item.id} />) }
+                )}
+            {/* </div> */}
+            {/* {messages.map((item, i) => <Message key={i} user={item.id === id ? '' : item.user} message={item.message} classs={item.id === id ? 'right' : 'left'} />)} */}
+            <div className="inputBox">
+                <input onKeyPress={(event) => event.key === 'Enter' ? send() : null} type="text" id="chatInput" />
+                <button onClick={send} className="sendBtn">Send</button>
+            </div>
+        </div>
 
-        </div>
-        </div>
+    </div>
     )
 };
 
 export default Chat;
+

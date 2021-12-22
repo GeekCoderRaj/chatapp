@@ -24,7 +24,8 @@ io.on("connection",(socket)=>{
     })
     socket.on('message',({message,room,id})=>{
         console.log(message,room);
-        socket.broadcast.to(room).emit('sendMessage',{message,id});
+
+        socket.to(room).emit('sendMessage',{user:users[id],message,id});
         console.log("send");
     })
     socket.on('disconnect',(room)=>{
