@@ -18,19 +18,19 @@ io.on("connection",(socket)=>{
     socket.on('joined',({user, room})=>{
         socket.join(room);
         users[socket.id]=user;
-        console.log(`${user} has joined`);
+        //console.log(`${user} has joined`);
         socket.broadcast.to(room).emit('userJoined',{user: users[socket.id],message:`${users[socket.id]} has joined`});
-        console.log(users);
+        //console.log(users);
     })
     socket.on('message',({message,room,id})=>{
-        console.log(message,room);
+        //console.log(message,room);
 
         socket.to(room).emit('sendMessage',{user:users[id],message,id});
-        console.log("send");
+        //console.log("send");
     })
     socket.on('disconnect',(room)=>{
         socket.broadcast.to(room).emit('leave',{user:"Admin",message:`${users[socket.id]} has left`});
-        console.log("user left");
+        //console.log("user left");
     });
     socket.emit('welcome',{user:"Admin",message:'Welcome to the chat'});
 
