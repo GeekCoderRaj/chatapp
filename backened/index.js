@@ -19,7 +19,7 @@ io.on("connection",(socket)=>{
         socket.join(room);
         users[socket.id]=user;
         console.log(`${user} has joined`);
-        socket.broadcast.to(room).emit('userJoined',{user:"Admin",message:`${users[socket.id]} has joined`});
+        socket.broadcast.to(room).emit('userJoined',{user: users[socket.id],message:`${users[socket.id]} has joined`});
         console.log(users);
     })
     socket.on('message',({message,room,id})=>{

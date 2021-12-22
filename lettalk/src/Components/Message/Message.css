@@ -10,14 +10,14 @@
 
 .right{
     float: right;
-    background-color: crimson;
-    color: white;
+    background-color: rgb(20, 220, 203);
+    color: rgb(15, 15, 15);
     text-align: right;
 }
 
 .left{
     float: left;
     text-align: left;
-    background-color: rgb(196, 255, 184);
+    background-color: rgb(184, 189, 255);
     
 }
