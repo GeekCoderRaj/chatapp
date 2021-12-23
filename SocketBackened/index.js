@@ -10,7 +10,7 @@ app.get('/',(req,res)=>{
     res.send("<h1> I </h1>");
 })
 const users = [{}];
-const roomuser=[{}];
+const roomuser={};
 const io=socketIO(server);
 
 io.on("connection",(socket)=>{
@@ -20,11 +20,15 @@ io.on("connection",(socket)=>{
         socket.join(room);
         users[socket.id]=user;
         //console.log(`${user} has joined`);
-
+        const newroom=[];
+        newroom.push(user);
+        console.log(newroom);
+        roomuser[room]?roomuser[room].push(user):roomuser[room]=newroom;
         socket.to(room).emit('userJoined',{user: user});
         console.log(users);
-        socket.broadcast.to(room).emit('userJoined',{user: users[socket.id],message:`${users[socket.id]} has joined`});
+        socket.to(room).emit('userJoined',{user: users[socket.id],message:`${users[socket.id]} has joined`});
         //console.log(users);
+        console.log(roomuser);
     })
     socket.on('message',({message,room,id})=>{
         //console.log(message,room);

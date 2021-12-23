@@ -38,8 +38,6 @@ const Chat = () => {
 			//console.log(data?.user, data?.message);
 		});
         socket.on('sendMessage', (data) =>{ 
-            let temp=messages;
-            temp.push({user:data.user,id: data.id,message: data.message});
             setMessages([...messages,data]);
         });  
 		return () => {

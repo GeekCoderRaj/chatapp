@@ -8,23 +8,7 @@ const Message = ({ user, id }) => {
                 {`${user.user}: ${user.message}`}
             </div>:<div className="messageBox right">
                 {`You: ${user.message}`}
-           </div>
-    
-    // console.log(user,message,classs);
-    // if (user!=="") {
-    //     return (
-    //         <div className={`messageBox ${classs}`}  >
-    //             {`${user}: ${message}`}
-    //         </div>
-    //     )
-    // }
-    // else {
-    //     return (
-    //         <div className={`messageBox ${classs}`}>
-    //             {`You: ${message}`}
-    //         </div>
-    //     )
-    // }
+           </div>    
 }
 
 export default Message
