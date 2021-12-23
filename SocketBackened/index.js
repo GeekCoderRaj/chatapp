@@ -10,6 +10,7 @@ app.get('/',(req,res)=>{
     res.send("<h1> I </h1>");
 })
 const users = [{}];
+const roomuser=[{}];
 const io=socketIO(server);
 
 io.on("connection",(socket)=>{
@@ -18,8 +19,8 @@ io.on("connection",(socket)=>{
     socket.on('joined',({user, room})=>{
         socket.join(room);
         users[socket.id]=user;
-        console.log(`${user} has joined`);
-        socket.broadcast.to(room).emit('userJoined',{user:"Admin",message:`${users[socket.id]} has joined`});
+        //console.log(`${user} has joined`);
+        socket.to(room).emit('userJoined',{user: user});
         console.log(users);
     })
     socket.on('message',({message,room,id})=>{

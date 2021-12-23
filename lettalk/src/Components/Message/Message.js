@@ -3,10 +3,10 @@ import "./Message.css";
 
 
 const Message = ({ user, id }) => {
-    console.log(user,id,"props");
-    return user.id!==""?<div className={`messageBox ${user.id===user?"left":"right"}`}  >
-                {`${user.id}: ${user.message}`}
-            </div>:<div className={`messageBox ${user.id===user?"left":"right"}`}>
+    //console.log(user,id,"props");
+    return (user.id!==id)?<div className="messageBox left"  >
+                {`${user.user}: ${user.message}`}
+            </div>:<div className="messageBox right">
                 {`You: ${user.message}`}
            </div>
     
