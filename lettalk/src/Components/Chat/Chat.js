@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { users } from '../Joins/Join';
 import socketIo from 'socket.io-client';
-import ReactScrollToBottom from "react-scroll-to-bottom";
+//import ReactScrollToBottom from "react-scroll-to-bottom";
 import Message  from '../Message/Message';
 import '../Chat/chat.css';
 import sendLogo from "../../images/send.png";

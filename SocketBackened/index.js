@@ -20,18 +20,23 @@ io.on("connection",(socket)=>{
         socket.join(room);
         users[socket.id]=user;
         //console.log(`${user} has joined`);
+<<<<<<< HEAD:SocketBackened/index.js
         socket.to(room).emit('userJoined',{user: user});
         console.log(users);
+=======
+        socket.broadcast.to(room).emit('userJoined',{user: users[socket.id],message:`${users[socket.id]} has joined`});
+        //console.log(users);
+>>>>>>> fceb83634cad014731b1db228292112734f696e4:backened/index.js
     })
     socket.on('message',({message,room,id})=>{
-        console.log(message,room);
+        //console.log(message,room);
 
         socket.to(room).emit('sendMessage',{user:users[id],message,id});
-        console.log("send");
+        //console.log("send");
     })
     socket.on('disconnect',(room)=>{
         socket.broadcast.to(room).emit('leave',{user:"Admin",message:`${users[socket.id]} has left`});
-        console.log("user left");
+        //console.log("user left");
     });
     socket.emit('welcome',{user:"Admin",message:'Welcome to the chat'});
 
